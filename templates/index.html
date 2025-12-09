@@ -1,1 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Video Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-download"></i>
+                <h1>MultiDownloader<span class="highlight">PRO</span></h1>
+            </div>
+            <p class="tagline">Download videos from YouTube, TikTok, Instagram, Twitter & Facebook</p>
+        </header>
 
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- URL Input Section -->
+            <section class="input-section">
+                <div class="input-container">
+                    <i class="fas fa-link"></i>
+                    <input 
+                        type="text" 
+                        id="videoUrl" 
+                        placeholder="Paste video URL here (YouTube, TikTok, Instagram, etc)..."
+                        autocomplete="off"
+                    >
+                    <button id="analyzeBtn" class="btn-primary">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </div>
+                <div class="url-examples">
+                    <small>Supported: 
+                        <span class="example">https://youtube.com/watch?v=...</span> •
+                        <span class="example">https://tiktok.com/@user/video/...</span> •
+                        <span class="example">https://instagram.com/p/...</span>
+                    </small>
+                </div>
+            </section>
+
+            <!-- Platform Cards -->
+            <section class="platforms-section">
+                <h2><i class="fas fa-th-large"></i> Supported Platforms</h2>
+                <div class="platforms-grid" id="platformsGrid">
+                    <!-- Platforms will be loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Video Info Section -->
+            <section class="info-section hidden" id="infoSection">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img id="videoThumb" src="" alt="Video Thumbnail">
+                        <div class="video-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-details">
+                        <h3 id="videoTitle">Video Title</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> <span id="videoAuthor">Unknown</span></span>
+                            <span><i class="fas fa-clock"></i> <span id="videoDuration">0:00</span></span>
+                            <span><i class="fas fa-film"></i> <span id="videoPlatform">Platform</span></span>
+                        </div>
+                        <div class="format-selection">
+                            <h4><i class="fas fa-download"></i> Select Format</h4>
+                            <div class="formats-grid" id="formatsGrid">
+                                <!-- Formats will be loaded dynamically -->
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button id="downloadBtn" class="btn-download" disabled>
+                                <i class="fas fa-download"></i> Download Video
+                            </button>
+                            <button id="cancelBtn" class="btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download Progress -->
+            <section class="progress-section hidden" id="progressSection">
+                <div class="progress-card">
+                    <h3><i class="fas fa-spinner fa-spin"></i> Downloading...</h3>
+                    <div class="progress-info">
+                        <div class="progress-text" id="progressText">Starting download...</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-percentage" id="progressPercentage">0%</div>
+                    </div>
+                    <div class="progress-actions hidden" id="progressActions">
+                        <a id="downloadLink" class="btn-success" download>
+                            <i class="fas fa-file-download"></i> Save Video
+                        </a>
+                        <button id="newDownloadBtn" class="btn-secondary">
+                            <i class="fas fa-plus"></i> New Download
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features-section">
+                <h2><i class="fas fa-star"></i> Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Download</h3>
+                        <p>High-speed downloads with our optimized servers</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Multi-Quality</h3>
+                        <p>Download in 1080p, 720p, 480p or audio only</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Safe & Secure</h3>
+                        <p>No ads, no malware, files deleted after 1 hour</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-infinity"></i>
+                        <h3>Unlimited</h3>
+                        <p>No download limits, completely free to use</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4>
+                    <p>This tool is for personal use only. Download copyrighted content only with permission from the copyright holder. Files are automatically deleted after 1 hour.</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-code"></i> Open Source</h4>
+                    <p>Powered by yt-dlp, pytube, and other open-source libraries.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MultiDownloaderPRO. All rights reserved. | 
+                    <a href="#"><i class="fab fa-github"></i> GitHub</a> | 
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal hidden" id="loadingModal">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p id="loadingText">Processing your request...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
